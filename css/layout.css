@@ -1,0 +1,63 @@
+body {
+	background: #ccc;
+	display:block;
+	font-family: verdana;
+}
+
+.spacer{
+	margin: 25px 25px 0 0;
+}
+.msg{
+	display: inline-block;
+	position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+#wrapper {
+	background: #FFF;
+    max-width: 1220px;
+    padding: 25px;
+    width: calc(100% - 50px);
+	height: 100%;
+	margin: 0 auto;
+	overflow:hidden;
+	display:block;
+}
+
+.hidden {
+	display: none;
+}
+
+canvas#glCanvas {
+	width: 100%;
+	position: relative;
+	background:gold;	
+	border:1px solid #000000;
+}
+
+#game{
+	display:block;
+	position: relative;
+	
+}
+
+#navigation button {
+	float: right;
+	height: 50px;
+	width: 50px;
+	margin-left:25px;
+}
+
+#navigation {
+	position: relative;
+	background: #ccc;
+	padding: 25px;
+	
+}
+
+#navigation:after{
+	content:"";
+	display: table;
+	clear:both;
+}
