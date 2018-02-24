@@ -2,8 +2,16 @@
 <html>
 	<head>
 		<title>My new Game</title>
-		
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
 		
 		<!--Stylesheets-->
 		<link rel="stylesheet" type="text/css" href="css/html5reset-1.6.1.css">
@@ -22,22 +30,33 @@
 	<!--<script defer src="js/game/main.js"></script> -->
 	<script defer src="js/game/game.js"></script>
 	<script defer src="js/webgl/material.js"></script>
-	<script>
+	<script defer src="js/webgl/maths.js"></script>
+<script>
 		window.addEventListener("load", function(){
 			window.game = new game();
+			window.game.resize();
 			loop();
 		});
+		window.addEventListener("resize", function(){
+			window.game.resize();
+		});
+		
 	</script>
-	
 	<script type="vertex_shader" id="vs_01">
 		attribute vec2 a_position;
 		attribute vec2 a_texCoord;
 		
+		uniform mat3 u_world;
+		uniform mat3 u_object;
+		uniform vec2 u_frame;
+		
+		
 		varying vec2 v_texCoord;
 		void main(){
-			gl_Position = vec4(a_position, 1, 1);
-			v_texCoord = a_texCoord;
+			gl_Position = vec4( u_world * u_object * vec3(a_position, 1), 1);
+			v_texCoord = a_texCoord + u_frame;
 		}
+		
 	</script>
 	
 	<script type="fragment_shader" id="fs_01">
@@ -48,8 +67,11 @@
 		void main(){
 			gl_FragColor = texture2D(u_image, v_texCoord);
 		}
+		
 	</script>
+	
 </head>
+
 <body id="mng">
 	<noscript>Looks like your browser doesn't support JavaScript! Please unblock your script blocker to play. (Or download a browser that supports JavaScript.)</noscript>
 	<div id="wrapper">
@@ -60,7 +82,7 @@
 		</div>
 		<div class="spacer"></div>
 		<div id="game">
-			<canvas id="glCanvas" width="1920px" height="1080px">
+			<canvas id="glCanvas">
 				Oh no! Your browser doesn't support canvas!
 			</canvas>
 		</div>	

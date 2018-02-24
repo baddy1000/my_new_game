@@ -1,17 +1,22 @@
+const game_screen = document.getElementById('glCanvas');
+
 function switchFullscreenButton(isFullscreen) {
 	if (isFullscreen == true) {
 		addClassByID("hidden", "fs-button");
 		removeClassByID("hidden", "fs-exit-button");
+		addClassByID("fullscreen", "glCanvas");
 	}
 	else {
 		addClassByID("hidden", "fs-exit-button");
 		removeClassByID("hidden", "fs-button");
+		removeClassByID("fullscreen", "glCanvas");
 	}
 }
 
 document.getElementById('fs-button').addEventListener('click', () => {
 	if (screenfull.enabled) {
-		screenfull.request();
+		screenfull.request(game_screen);
+		
 		} else {
 		// Ignore or do something else
 	}
